@@ -1,6 +1,8 @@
-C:\Users\mylle\OneDrive\Documents\proj1-prog\src\main\java\main\Main.java
-C:\Users\mylle\OneDrive\Documents\proj1-prog\src\main\java\View\teste.java
-C:\Users\mylle\OneDrive\Documents\proj1-prog\src\main\java\interfaces\IRepo.java
-C:\Users\mylle\OneDrive\Documents\proj1-prog\src\main\java\dao\ConectaDB.java
-C:\Users\mylle\OneDrive\Documents\proj1-prog\src\main\java\dao\RepoCliente.java
-C:\Users\mylle\OneDrive\Documents\proj1-prog\src\main\java\entidades\Cliente.java
+C:\Users\mylle\Downloads\Projetos-3-semestre\proj1-prog\src\main\java\main\Main.java
+C:\Users\mylle\Downloads\Projetos-3-semestre\proj1-prog\src\main\java\view\PaginaInicial.java
+C:\Users\mylle\Downloads\Projetos-3-semestre\proj1-prog\src\main\java\dao\ConectaDB.java
+C:\Users\mylle\Downloads\Projetos-3-semestre\proj1-prog\src\main\java\model\Cliente.java
+C:\Users\mylle\Downloads\Projetos-3-semestre\proj1-prog\src\main\java\interfaces\IRepo.java
+C:\Users\mylle\Downloads\Projetos-3-semestre\proj1-prog\src\main\java\controller\ControllerCliente.java
+C:\Users\mylle\Downloads\Projetos-3-semestre\proj1-prog\src\main\java\dao\RepoCliente.java
+C:\Users\mylle\Downloads\Projetos-3-semestre\proj1-prog\src\main\java\view\CadastroCliente.java

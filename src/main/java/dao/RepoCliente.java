@@ -1,6 +1,6 @@
 package dao;
 
-import entidades.Cliente;
+import model.Cliente;
 import interfaces.IRepo;
 import java.util.List;
 import javax.persistence.EntityManager;

@@ -5,23 +5,30 @@
 package main;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
+import dao.RepoCliente;
+import model.Cliente;
+
 import java.awt.Color;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
-/**
- *
- * @author mylle
- */
+
 public class Main {
      public static void main(String[] args){
         try{
-        UIManager.put("Button.background", new Color(0, 150, 136));
+        UIManager.put("Button.background", new Color(245, 198, 198));
+         UIManager.put("Button.hoverBackground", new Color(255, 182, 193)); 
+            UIManager.put("Button.focusedBackground", new Color(240, 128, 128)); 
+    
         UIManager.setLookAndFeel(new FlatMacLightLaf());
-        } catch(Exception e){
-            e.printStackTrace();
+        } catch(UnsupportedLookAndFeelException e){
         }
+        Cliente c1 = new Cliente(null, "Leticia", "leticia@gmail.com", "98765432178", 100);
+        new RepoCliente().save(c1);
         
-        new View.PaginaInicial().setVisible(true);
+//        new view.PaginaInicial().setVisible(true);
+         new view.CadastroCliente().setVisible(true);
 
     }
     
