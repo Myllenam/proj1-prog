@@ -29,9 +29,9 @@ public class Main {
         } catch (UnsupportedLookAndFeelException e) {
         }
 //        List<Produto> produtos=new ControllerProduto().getProdutos();
-        Cliente cliente=new ControllerCliente().encontrarCliente("98765434567");
-        Integer id=new ControllerCliente().encontrarIdCliente("98765434567");
-        System.out.println(id);
+//        Cliente cliente=new ControllerCliente().encontrarCliente("98765434567");
+//        Integer id=new ControllerCliente().encontrarIdCliente("98765434567");
+//        System.out.println(id);
 
         Router router = new Router();
 

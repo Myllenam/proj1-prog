@@ -2,7 +2,11 @@
 package controller;
 
 import dao.RepoCliente;
+import dao.RepoProduto;
 import model.Cliente;
+import model.Produto;
+
+import java.util.List;
 
 public class ControllerCliente extends Controller {
 
@@ -43,6 +47,10 @@ public class ControllerCliente extends Controller {
             return true;
         }
         return false;
+    }
+
+    public List<Cliente> getClientes() {
+        return new RepoCliente().getAll();
     }
 
 }

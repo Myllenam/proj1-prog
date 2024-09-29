@@ -1,8 +1,11 @@
 package view;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import controller.ControllerCliente;
+import controller.ControllerPagamento;
+import controller.ControllerProduto;
+import model.Cliente;
+import model.Pagamento;
+import model.Produto;
 import utils.Router;
 import view.components.ItemCarrinho;
 import view.components.ItemProduto;
@@ -12,16 +15,17 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import org.json.simple.JSONArray;
 import view.components.ProductLabel;
 
 public class TelaInicial extends TelaBase {
 
+    private ControllerProduto controllerProduto;
+    private ControllerPagamento controllerPagamento;
+    private ControllerCliente controllerCliente;
 
     public JPanel telaInicial;
     private JButton inicioButton;
@@ -33,17 +37,32 @@ public class TelaInicial extends TelaBase {
     private JPanel cartPanel;
     private JPanel totalPanel;
     private JComboBox formasPagamento;
+    private JComboBox clientes;
     private static JLabel valorTotal;
 
     private static ArrayList<ItemCarrinho> carrinho = new ArrayList<>();
 
     public TelaInicial(Router router) {
         super(router);
+        controllerProduto = new ControllerProduto();
+        controllerPagamento = new ControllerPagamento();
+        controllerCliente = new ControllerCliente();
+
+
+//        loadFeed();
         loadPagamentosComboBox();
+//        loadClientesComboBox();
         cadastrarClienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 router.route("telaCadastroCliente");
+            }
+        });
+
+        finalizarCompraButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ;
             }
         });
 
@@ -59,6 +78,7 @@ public class TelaInicial extends TelaBase {
             @Override
             public void componentShown(ComponentEvent e) {
                 loadFeed();
+                loadPagamentosComboBox();
             }
 
             @Override
@@ -67,68 +87,17 @@ public class TelaInicial extends TelaBase {
             }
         });
 
-        cartPanel.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                atualizaValorTotal();
-            }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
 
     }
-
-    /**
-     * TODO: REMOVER, PARA TESTES APENAS
-     *
-     * @param fileName
-     * @return
-     */
-    public static JSONArray getAllFromJson(String fileName) {
-        try {
-            String filePath = "data/" + fileName + ".json";
-
-            JSONParser parser = new JSONParser();
-            Object obj = parser.parse(new FileReader(filePath));
-            JSONObject jsonObject = (JSONObject) obj;
-
-            // Obter o array dentro do objeto JSON
-            JSONArray array = (JSONArray) jsonObject.get(fileName);
-            return array;
-
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
-            return new JSONArray();
-        }
-    }
-
 
     private void loadFeed() {
         productPanel.removeAll();
         productPanel.setLayout(new BoxLayout(productPanel, BoxLayout.Y_AXIS));
+        List<Produto> produtos= controllerProduto.getProdutos();
 
-        JSONArray competicoes = getAllFromJson("produtos");
-
-        for (Object competicao : competicoes) {
-            ItemProduto card = createFeedCard((JSONObject) competicao);
+        for (Produto p : produtos) {
+            ItemProduto card = createFeedCard(p);
             productPanel.add(card);
             productPanel.add(Box.createVerticalStrut(10));
             productPanel.revalidate();
@@ -136,17 +105,12 @@ public class TelaInicial extends TelaBase {
         }
     }
 
-    /**
-     * Carrega o componente ComboBox com as modalidades cadastradas no sistema
-     */
     private void loadPagamentosComboBox() {
-        HashMap<Long, String>  pagamentoHashMap = new HashMap<>();
-        JSONArray pagamento = getAllFromJson("pagamento");
+        HashMap<Integer, String>  pagamentoHashMap = new HashMap<>();
+        List<Pagamento> pagamentos = controllerPagamento.getPagamentos();
 
-        for (var i = 0; i < pagamento.size(); i++) {
-            Long id = (Long) ((JSONObject) pagamento.get(i)).get("id_pagamento");
-            String tipo = (String) ((JSONObject) pagamento.get(i)).get("tipo_pagamento");
-            pagamentoHashMap.put(id, tipo);
+        for (Pagamento p : pagamentos) {
+            pagamentoHashMap.put(p.getId_pagamento(), p.getTipo_pagamento());
         }
 
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
@@ -156,29 +120,39 @@ public class TelaInicial extends TelaBase {
         formasPagamento.setModel(model);
     }
 
-    private ItemProduto createFeedCard(JSONObject competicoes) {
+    private void loadClientesComboBox() {
+        HashMap<Integer, String>  pagamentoHashMap = new HashMap<>();
+        List<Cliente> clientesCadastrados = controllerCliente.getClientes();
+
+        for (Cliente c : clientesCadastrados) {
+            pagamentoHashMap.put(c.getId_cliente(), c.getNome());
+        }
+
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (String c : pagamentoHashMap.values()) {
+            model.addElement(c);
+        }
+        clientes.setModel(model);
+    }
+
+    private ItemProduto createFeedCard(Produto p) {
         Border topBorder = new EmptyBorder(5, 25, 5, 0);
         Font nomeFont = new Font("Arial", Font.BOLD, 24);
         Border defaultBorder = new EmptyBorder(0, 10, 5, 0);
         Font defaultFont = new Font("Arial", Font.BOLD, 14);
 
-        Long id = (Long) competicoes.get("id_produto");
-        String nome = (String) competicoes.get("nome");
-        String descricao = (String) competicoes.get("descricao");
-        Double preco = (Double) competicoes.get("preco");
-
-        ProductLabel nomeLabel = new ProductLabel(nome, topBorder, nomeFont);
-        ProductLabel descricaoLabel = new ProductLabel(descricao, topBorder, nomeFont);
-        ProductLabel precoLabel = new ProductLabel(preco.toString(), topBorder, nomeFont);
+        ProductLabel nomeLabel = new ProductLabel(p.getNome(), topBorder, nomeFont);
+        ProductLabel descricaoLabel = new ProductLabel(p.getDescricao(), topBorder, nomeFont);
+        ProductLabel precoLabel = new ProductLabel(String.valueOf(p.getPreco()), topBorder, nomeFont);
 
 
         JButton adicionarCarrinho = new JButton();
         adicionarCarrinho.setText("Adicionar");
-        adicionarCarrinho.setName("produto_" + id);
+        adicionarCarrinho.setName("produto_" + p.getId_produto());
         adicionarCarrinho.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addToCart(id, nome, preco, descricao);
+                addToCart(p);
             }
         });
 
@@ -191,7 +165,7 @@ public class TelaInicial extends TelaBase {
         return card;
     }
 
-    private boolean isInCart(Long id) {
+    private boolean isInCart(Integer id) {
         for (ItemCarrinho i : carrinho) {
             if (i.getId() == id) {
                 return true;
@@ -211,17 +185,9 @@ public class TelaInicial extends TelaBase {
 
     }
 
-    private void addToCart(Long id, String nome, Double preco, String descricao) {
-        Produto p = new Produto();
-        p.setId_produto(id);
-        p.setNome(nome);
-        p.setPreco(preco);
-        p.setDescricao(descricao);
-
-        int quantidade = 1;
-
-        if (!isInCart(id)) {
-            ItemCarrinho item = new ItemCarrinho(id, nome, quantidade, preco);
+    private void addToCart(Produto p) {
+        if (!isInCart(p.getId_produto())) {
+            ItemCarrinho item = new ItemCarrinho(p.getId_produto(), p.getNome(), 1, p.getPreco());
             carrinho.add(item);
             cartPanel.add(item);
             cartPanel.add(Box.createVerticalStrut(10));

@@ -1,7 +1,11 @@
 package controller;
 
 import dao.RepoPagamento;
+import dao.RepoProduto;
 import model.Pagamento;
+import model.Produto;
+
+import java.util.List;
 
 public class ControllerPagamento extends Controller {
 
@@ -14,5 +18,8 @@ public class ControllerPagamento extends Controller {
             return true;
         }
         return false;
+    }
+    public List<Pagamento> getPagamentos() {
+        return new RepoPagamento().getAll();
     }
 }

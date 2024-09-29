@@ -15,12 +15,12 @@ public class ItemCarrinho extends JPanel {
     private JLabel precoLabel = new JLabel();
     private JLabel precoTotalLabel = new JLabel();
 
-    private Long id;
+    private Integer id;
     private String nome;
     private Double preco;
     private Integer quantidade;
 
-    public ItemCarrinho(Long id, String nome, Integer qtde, Double preco) {
+    public ItemCarrinho(Integer id, String nome, Integer qtde, Double preco) {
         this.id = id;
         this.nome = nome;
         this.quantidade = qtde;
@@ -111,7 +111,7 @@ public class ItemCarrinho extends JPanel {
         actionsPanel.add(adicionarButton);
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
