@@ -29,8 +29,14 @@ public class TelaCadastroCliente extends TelaBase {
         cadastrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.cadastrarCliente(nome.getText(), email.getText(), cpf.getText());
-                router.route("telaInicial");
+                boolean result = controller.cadastrarCliente(nome.getText(), email.getText(), cpf.getText());
+                if (result) {
+                    showMessage("Usuário cadastrado com sucesso!");
+                    router.route("telaInicial");
+                    System.out.println("Cliente cadastrado com sucesso");
+                } else {
+                    showMessage("Erro ao cadastrar usuário! Certifique-se de que todos o campos foram preenchidos corretamnete.");
+                }
             }
         });
     }

@@ -10,12 +10,14 @@ public class TelaInicial extends TelaBase {
 
 
     public JPanel telaInicial;
-    private JButton picaDuraButton;
+    private JButton inicioButton;
+    private JPanel menu;
+    private JButton cadastrarClienteButton;
 
     public TelaInicial(Router router) {
         super(router);
 
-        picaDuraButton.addActionListener(new ActionListener() {
+        cadastrarClienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 router.route("telaCadastroCliente");

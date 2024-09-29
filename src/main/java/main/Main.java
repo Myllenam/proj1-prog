@@ -35,12 +35,6 @@ public class Main {
         router.setVisible(true);
 
 
-//        Cliente c1 = new Cliente(null, "Leticia", "leticia@gmail.com", "98765432178", 100);
-//        new RepoCliente().save(c1);
-
-//        new view.PaginaInicial().setVisible(true);
-//         new view.CadastroCliente().setVisible(true);
-
     }
 
 }
