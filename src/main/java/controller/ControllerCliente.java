@@ -9,6 +9,13 @@ public class ControllerCliente extends Controller {
     public ControllerCliente() {
     }
 
+    public Cliente encontrarCliente( String cpf) {
+        return new RepoCliente().getCpf(cpf);
+    }
+    public Integer encontrarIdCliente( String cpf) {
+        return new RepoCliente().getid(cpf);
+    }
+
     private boolean validaCampos(String nome, String email, String cpf) {
         String cpfLimpo = cpf.replaceAll("\\.", "").replaceAll("-", "");
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
@@ -37,4 +44,5 @@ public class ControllerCliente extends Controller {
         }
         return false;
     }
+
 }

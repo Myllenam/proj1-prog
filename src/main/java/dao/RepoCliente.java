@@ -1,14 +1,14 @@
 package dao;
 
 import model.Cliente;
-import interfaces.IRepo;
+import interfaces.IRepoCliente;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 
-public class RepoCliente implements IRepo<Cliente, Long> {
+public class RepoCliente implements IRepoCliente<Cliente, Long, Integer> {
     
     private EntityManagerFactory emf= new ConectaDB().getConexao();
     
@@ -30,16 +30,35 @@ public class RepoCliente implements IRepo<Cliente, Long> {
     }
 
     @Override
-    public Cliente get(Long id) {
+    public Cliente getCpf(String cpf) {
         EntityManager em = emf.createEntityManager();
         Cliente cliente = null;
         try {
-            cliente = em.find(Cliente.class, id);
+            cliente = em.createQuery("SELECT c FROM Cliente c WHERE c.cpf = :cpf", Cliente.class)
+                    .setParameter("cpf", cpf)
+                    .getSingleResult();
         } finally {
             em.close();
         }
         return cliente;
     }
+
+    @Override
+    public Integer getid(String cpf) {
+        EntityManager em = emf.createEntityManager();
+        Integer id = null;
+        try {
+            id = em.createQuery("SELECT c.id_cliente FROM Cliente c WHERE c.cpf = :cpf", Integer.class)
+                    .setParameter("cpf", cpf)
+                    .getSingleResult();
+        } catch ( Exception e) {
+            System.out.println("Nenhum cliente encontrado com o CPF: " + cpf);
+        } finally {
+            em.close();
+        }
+        return id;
+    }
+
 
     @Override
     public void update(Cliente obj) {
@@ -69,22 +88,5 @@ public class RepoCliente implements IRepo<Cliente, Long> {
         return clientes;
     }
 
-    @Override
-    public void delete(Long id) {       
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            Cliente cliente = em.find(Cliente.class, id);
-            if (cliente != null) {
-                em.remove(cliente);
-            }
-            tx.commit();
-        } catch (Exception e) {
-            if (tx.isActive()) tx.rollback();
-            throw new RuntimeException(e.getMessage());
-        } finally {
-            em.close();
-        }
-    }
+
 }
