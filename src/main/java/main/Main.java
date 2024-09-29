@@ -5,11 +5,16 @@
 package main;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import controller.ControllerCliente;
+import controller.ControllerProduto;
+import model.Cliente;
+import model.Produto;
 import utils.Router;
 import view.TelaCadastroCliente;
 import view.TelaInicial;
 
 import java.awt.Color;
+import java.util.List;
 import javax.swing.*;
 
 
@@ -23,6 +28,10 @@ public class Main {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
         } catch (UnsupportedLookAndFeelException e) {
         }
+//        List<Produto> produtos=new ControllerProduto().getProdutos();
+        Cliente cliente=new ControllerCliente().encontrarCliente("98765434567");
+        Integer id=new ControllerCliente().encontrarIdCliente("98765434567");
+        System.out.println(id);
 
         Router router = new Router();
 
