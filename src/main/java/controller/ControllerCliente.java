@@ -4,7 +4,7 @@ package controller;
 import dao.RepoCliente;
 import model.Cliente;
 
-public class ControllerCliente {
+public class ControllerCliente extends Controller {
 
     public ControllerCliente() {
     }
