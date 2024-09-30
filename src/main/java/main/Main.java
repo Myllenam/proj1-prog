@@ -12,6 +12,7 @@ import model.Produto;
 import utils.Router;
 import view.TelaCadastroCliente;
 import view.TelaInicial;
+import view.TelaLogin;
 
 import java.awt.Color;
 import java.util.List;
@@ -35,9 +36,11 @@ public class Main {
 
         Router router = new Router();
 
+        JPanel telaLogin = new TelaLogin(router).telaLogin;
         JPanel telaInicial = new TelaInicial(router).telaInicial;
         JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
 
+        router.addComponent(telaLogin, "telaLogin");
         router.addComponent(telaInicial, "telaInicial");
         router.addComponent(telaCadastroCliente, "telaCadastroCliente");
 

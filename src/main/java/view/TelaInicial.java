@@ -15,9 +15,11 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import view.components.ProductLabel;
 
@@ -28,7 +30,6 @@ public class TelaInicial extends TelaBase {
     private ControllerCliente controllerCliente;
 
     public JPanel telaInicial;
-    private JButton inicioButton;
     private JPanel menu;
     private JButton cadastrarClienteButton;
     private JPanel productPanel;
@@ -36,8 +37,9 @@ public class TelaInicial extends TelaBase {
     private JButton finalizarCompraButton;
     private JPanel cartPanel;
     private JPanel totalPanel;
-    private JComboBox formasPagamento;
+    private JComboBox formasPagamentot;
     private JComboBox clientes;
+    private JButton sairButton;
     private static JLabel valorTotal;
 
     private static ArrayList<ItemCarrinho> carrinho = new ArrayList<>();
@@ -56,6 +58,12 @@ public class TelaInicial extends TelaBase {
             @Override
             public void actionPerformed(ActionEvent e) {
                 router.route("telaCadastroCliente");
+            }
+        });
+        sairButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                router.route("telaLogin");
             }
         });
 
@@ -78,7 +86,7 @@ public class TelaInicial extends TelaBase {
             @Override
             public void componentShown(ComponentEvent e) {
                 loadFeed();
-                loadPagamentosComboBox();
+//                loadPagamentosComboBox();
             }
 
             @Override
@@ -117,7 +125,7 @@ public class TelaInicial extends TelaBase {
         for (String tipo : pagamentoHashMap.values()) {
             model.addElement(tipo);
         }
-        formasPagamento.setModel(model);
+        formasPagamentot.setModel(model);
     }
 
     private void loadClientesComboBox() {
@@ -140,10 +148,11 @@ public class TelaInicial extends TelaBase {
         Font nomeFont = new Font("Arial", Font.BOLD, 24);
         Border defaultBorder = new EmptyBorder(0, 10, 5, 0);
         Font defaultFont = new Font("Arial", Font.BOLD, 14);
-
+        NumberFormat formatadorMoeda = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        String precoFormatado = formatadorMoeda.format(p.getPreco());
         ProductLabel nomeLabel = new ProductLabel(p.getNome(), topBorder, nomeFont);
         ProductLabel descricaoLabel = new ProductLabel(p.getDescricao(), topBorder, nomeFont);
-        ProductLabel precoLabel = new ProductLabel(String.valueOf(p.getPreco()), topBorder, nomeFont);
+        ProductLabel precoLabel = new ProductLabel(precoFormatado, topBorder, nomeFont);
 
 
         JButton adicionarCarrinho = new JButton();
