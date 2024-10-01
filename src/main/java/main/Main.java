@@ -9,6 +9,7 @@ import utils.Router;
 import view.TelaCadastroCliente;
 import view.TelaInicial;
 import view.TelaLogin;
+import view.TelaPagamento;
 
 import java.awt.Color;
 import javax.swing.*;
@@ -34,10 +35,12 @@ public class Main {
         JPanel telaLogin = new TelaLogin(router).telaLogin;
         JPanel telaInicial = new TelaInicial(router).telaInicial;
         JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
+        JPanel telaPagamento = new TelaPagamento(router).telaPagamento;
 
         router.addComponent(telaLogin, "telaLogin");
         router.addComponent(telaInicial, "telaInicial");
         router.addComponent(telaCadastroCliente, "telaCadastroCliente");
+        router.addComponent(telaPagamento, "telaPagamento");
 
 
         router.setVisible(true);
