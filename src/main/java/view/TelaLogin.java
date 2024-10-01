@@ -12,6 +12,7 @@ public class TelaLogin extends TelaBase{
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JLabel ImageLogo;
+    private JButton telaPagamentoButton;
 
     public TelaLogin(Router router) {
         super(router);
@@ -19,6 +20,12 @@ public class TelaLogin extends TelaBase{
             @Override
             public void actionPerformed(ActionEvent e) {
                 router.route("telaInicial");
+            }
+        });
+        telaPagamentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                router.route("telaPagamento");
             }
         });
 }
