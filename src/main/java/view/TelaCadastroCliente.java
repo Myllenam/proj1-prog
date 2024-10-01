@@ -35,7 +35,7 @@ public class TelaCadastroCliente extends TelaBase {
                     router.route("telaInicial");
                     System.out.println("Cliente cadastrado com sucesso");
                 } else {
-                    showMessage("Erro ao cadastrar usuário! Certifique-se de que todos o campos foram preenchidos corretamnete.");
+                    showMessage("Erro ao cadastrar usuário! Certifique-se de que todos o campos foram preenchidos corretamente.");
                 }
             }
         });

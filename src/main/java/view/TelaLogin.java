@@ -12,7 +12,7 @@ public class TelaLogin extends TelaBase{
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JLabel ImageLogo;
-    private JButton telaPagamentoButton;
+    private JButton notaFiscalButton;
 
     public TelaLogin(Router router) {
         super(router);
@@ -22,12 +22,13 @@ public class TelaLogin extends TelaBase{
                 router.route("telaInicial");
             }
         });
-        telaPagamentoButton.addActionListener(new ActionListener() {
+        notaFiscalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                router.route("telaPagamento");
+                router.route("telaNotaFiscal");
             }
         });
+
 }
 
     private void createUIComponents() {

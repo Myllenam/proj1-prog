@@ -36,11 +36,8 @@ public class TelaInicial extends TelaBase {
     private JButton finalizarCompraButton;
     private JPanel cartPanel;
     private JPanel totalPanel;
-    private JComboBox formasPagamentot;
-    private JComboBox clientes;
     private JButton sairButton;
     private JScrollPane scrollProductPanel;
-    private JPanel panelDeMerda;
     private static JLabel valorTotal;
 
     private static ArrayList<ItemCarrinho> carrinho = new ArrayList<>();
@@ -53,8 +50,6 @@ public class TelaInicial extends TelaBase {
 
 
         loadFeed();
-        loadPagamentosComboBox();
-        loadClientesComboBox();
         cadastrarClienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,13 +62,13 @@ public class TelaInicial extends TelaBase {
                 router.route("telaLogin");
             }
         });
-
         finalizarCompraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ;
+                router.route("telaPagamento");
             }
         });
+
 
         telaInicial.addComponentListener(new ComponentListener() {
             @Override
@@ -87,8 +82,6 @@ public class TelaInicial extends TelaBase {
             @Override
             public void componentShown(ComponentEvent e) {
                 loadFeed();
-                loadPagamentosComboBox();
-                loadClientesComboBox();
             }
 
             @Override
@@ -122,35 +115,7 @@ public class TelaInicial extends TelaBase {
 
     }
 
-    private void loadPagamentosComboBox() {
-        HashMap<Integer, String>  pagamentoHashMap = new HashMap<>();
-        List<Pagamento> pagamentos = controllerPagamento.getPagamentos();
 
-        for (Pagamento p : pagamentos) {
-            pagamentoHashMap.put(p.getId_pagamento(), p.getTipo_pagamento());
-        }
-
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        for (String tipo : pagamentoHashMap.values()) {
-            model.addElement(tipo);
-        }
-        formasPagamentot.setModel(model);
-    }
-
-    private void loadClientesComboBox() {
-        HashMap<Integer, String>  pagamentoHashMap = new HashMap<>();
-        List<Cliente> clientesCadastrados = controllerCliente.getClientes();
-
-        for (Cliente c : clientesCadastrados) {
-            pagamentoHashMap.put(c.getId_cliente(), c.getNome());
-        }
-
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        for (String c : pagamentoHashMap.values()) {
-            model.addElement(c);
-        }
-        clientes.setModel(model);
-    }
 
     private ItemProduto createFeedCard(Produto p) {
         Border topBorder = new EmptyBorder(5, 25, 5, 0);

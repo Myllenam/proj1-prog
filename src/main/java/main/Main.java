@@ -6,10 +6,7 @@ package main;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import utils.Router;
-import view.TelaCadastroCliente;
-import view.TelaInicial;
-import view.TelaLogin;
-import view.TelaPagamento;
+import view.*;
 
 import java.awt.Color;
 import javax.swing.*;
@@ -34,13 +31,15 @@ public class Main {
 
         JPanel telaLogin = new TelaLogin(router).telaLogin;
         JPanel telaInicial = new TelaInicial(router).telaInicial;
-        JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
         JPanel telaPagamento = new TelaPagamento(router).telaPagamento;
+        JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
+        JPanel telaNotaFiscal = new TelaNotaFiscal().telaNotaFiscal;
 
         router.addComponent(telaLogin, "telaLogin");
         router.addComponent(telaInicial, "telaInicial");
         router.addComponent(telaCadastroCliente, "telaCadastroCliente");
         router.addComponent(telaPagamento, "telaPagamento");
+        router.addComponent(telaNotaFiscal, "telaNotaFiscal");
 
 
         router.setVisible(true);
