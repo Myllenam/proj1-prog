@@ -5,17 +5,12 @@
 package main;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import controller.ControllerCliente;
-import controller.ControllerProduto;
-import model.Cliente;
-import model.Produto;
 import utils.Router;
 import view.TelaCadastroCliente;
 import view.TelaInicial;
 import view.TelaLogin;
 
 import java.awt.Color;
-import java.util.List;
 import javax.swing.*;
 
 
@@ -43,6 +38,7 @@ public class Main {
         router.addComponent(telaLogin, "telaLogin");
         router.addComponent(telaInicial, "telaInicial");
         router.addComponent(telaCadastroCliente, "telaCadastroCliente");
+
 
         router.setVisible(true);
 

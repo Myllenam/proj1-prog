@@ -15,12 +15,22 @@ public class Router extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+        super.setSize(1280, 720);
+        super.setResizable(false);
+
+
         cardPanel = new JPanel();
+        cardPanel.setPreferredSize(new java.awt.Dimension(1280, 720)); // Garante que o painel tenha o mesmo tamanho da janela
+
         cardLayout = new CardLayout();
         cardPanel.setLayout(cardLayout);
 
+
         contentPane.setLayout(new BorderLayout());
         contentPane.add(cardPanel, BorderLayout.CENTER);
+
+        super.pack();  // Se quiser ajustar com base nos componentes, mas chame antes de setSize
+        super.setSize(1280, 720);
     }
 
     public void route(String destiny) {

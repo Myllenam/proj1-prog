@@ -33,13 +33,14 @@ public class TelaInicial extends TelaBase {
     private JPanel menu;
     private JButton cadastrarClienteButton;
     private JPanel productPanel;
-    private JButton cancelarButton;
     private JButton finalizarCompraButton;
     private JPanel cartPanel;
     private JPanel totalPanel;
     private JComboBox formasPagamentot;
     private JComboBox clientes;
     private JButton sairButton;
+    private JScrollPane scrollProductPanel;
+    private JPanel panelDeMerda;
     private static JLabel valorTotal;
 
     private static ArrayList<ItemCarrinho> carrinho = new ArrayList<>();
@@ -51,9 +52,9 @@ public class TelaInicial extends TelaBase {
         controllerCliente = new ControllerCliente();
 
 
-//        loadFeed();
+        loadFeed();
         loadPagamentosComboBox();
-//        loadClientesComboBox();
+        loadClientesComboBox();
         cadastrarClienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,7 +87,8 @@ public class TelaInicial extends TelaBase {
             @Override
             public void componentShown(ComponentEvent e) {
                 loadFeed();
-//                loadPagamentosComboBox();
+                loadPagamentosComboBox();
+                loadClientesComboBox();
             }
 
             @Override
@@ -108,9 +110,16 @@ public class TelaInicial extends TelaBase {
             ItemProduto card = createFeedCard(p);
             productPanel.add(card);
             productPanel.add(Box.createVerticalStrut(10));
-            productPanel.revalidate();
-            productPanel.repaint();
         }
+        productPanel.revalidate();
+        productPanel.repaint();
+
+        scrollProductPanel.revalidate();
+        scrollProductPanel.repaint();
+
+//        panelDeMerda.revalidate();
+//        panelDeMerda.repaint();
+
     }
 
     private void loadPagamentosComboBox() {
