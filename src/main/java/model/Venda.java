@@ -28,16 +28,9 @@ public class Venda implements Serializable {
         this.id_cliente = id_cliente;
     }
 
-    public Date getData() {
-        return data;
-    }
 
     public double getValor_total() {
         return valor_total;
-    }
-
-    public Integer getId_cliente() {
-        return id_cliente;
     }
 
     public void setData(Date data) {

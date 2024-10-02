@@ -23,7 +23,6 @@ public class RepoProduto implements IRepoGet<Produto, Long> {
     }
 
 
-
     @Override
     public List<Produto> getAll() {
         EntityManager em = emf.createEntityManager();

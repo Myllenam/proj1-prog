@@ -1,6 +1,5 @@
 package dao;
 
-import model.Cliente;
 import model.Venda;
 
 import javax.persistence.EntityManager;

@@ -13,9 +13,6 @@ public class ControllerCliente extends Controller {
     public ControllerCliente() {
     }
 
-    public Cliente encontrarCliente( String cpf) {
-        return new RepoCliente().getCpf(cpf);
-    }
 
 
     private boolean validaCampos(String nome, String email, String cpf) {

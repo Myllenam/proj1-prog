@@ -33,15 +33,5 @@ public class Pagamento implements Serializable {
         return tipo_pagamento;
     }
 
-    public void setTipo_pagamento(String tipo_pagamento) {
-        this.tipo_pagamento = tipo_pagamento;
-    }
 
-    public Integer getId_venda() {
-        return id_venda;
-    }
-
-    public void setId_venda(Integer id_venda) {
-        this.id_venda = id_venda;
-    }
 }

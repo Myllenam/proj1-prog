@@ -2,7 +2,6 @@ package dao;
 
 import model.Cliente;
 import interfaces.IRepoCliente;
-import model.Pagamento;
 
 import java.util.List;
 import javax.persistence.EntityManager;

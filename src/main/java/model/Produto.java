@@ -27,21 +27,6 @@ public class Produto implements Serializable {
        this.preco=preco;
     }
 
-    public void setId_produto(Integer id_produto) {
-        this.id_produto = id_produto;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
 
     public Integer getId_produto() {
         return id_produto;
