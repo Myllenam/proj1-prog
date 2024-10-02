@@ -1,6 +1,5 @@
 package view;
 
-import model.Produto;
 import utils.Principal;
 import utils.Router;
 import view.components.ItemCarrinho;
@@ -21,12 +20,12 @@ public class TelaNotaFiscal extends TelaBase {
     private JLabel cpfCliente;
     private JLabel emailCliente;
     private JLabel valorTotal;
-    private JButton voltarButton;
+    private JButton voltarButtont;
 
     public TelaNotaFiscal(Router router) {
         super(router);
 
-        voltarButton.addActionListener(new ActionListener() {
+        voltarButtont.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 router.route("telaInicial");

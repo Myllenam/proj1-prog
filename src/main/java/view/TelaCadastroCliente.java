@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class TelaCadastroCliente extends TelaBase {
     public JPanel telaCadastroCliente;
-    private JButton voltarButtont;
+    private JButton voltarButton;
     private JButton cadastrarButton;
     private JTextField nome;
     private JTextField cpf;
@@ -19,7 +19,7 @@ public class TelaCadastroCliente extends TelaBase {
         super(router);
         ControllerCliente controller =  new ControllerCliente();
 
-        voltarButtont.addActionListener(new ActionListener() {
+        voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 router.route("telaInicial");

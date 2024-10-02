@@ -23,13 +23,11 @@ public class Main {
         } catch (UnsupportedLookAndFeelException e) {
         }
 
-
         Router router = new Router();
-
         JPanel telaLogin = new TelaLogin(router).telaLogin;
+        JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
         JPanel telaInicial = new TelaInicial(router).telaInicial;
         JPanel telaPagamento = new TelaPagamento(router).telaPagamento;
-        JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
         JPanel telaNotaFiscal = new TelaNotaFiscal(router).telaNotaFiscal;
 
         router.addComponent(telaLogin, "telaLogin");
