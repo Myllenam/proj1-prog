@@ -33,7 +33,7 @@ public class Main {
         JPanel telaInicial = new TelaInicial(router).telaInicial;
         JPanel telaPagamento = new TelaPagamento(router).telaPagamento;
         JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
-        JPanel telaNotaFiscal = new TelaNotaFiscal().telaNotaFiscal;
+        JPanel telaNotaFiscal = new TelaNotaFiscal(router).telaNotaFiscal;
 
         router.addComponent(telaLogin, "telaLogin");
         router.addComponent(telaInicial, "telaInicial");

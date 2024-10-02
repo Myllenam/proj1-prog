@@ -2,6 +2,8 @@ package dao;
 
 import model.Cliente;
 import interfaces.IRepoCliente;
+import model.Pagamento;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,20 +45,19 @@ public class RepoCliente implements IRepoCliente<Cliente, Long, Integer> {
         return cliente;
     }
 
-    @Override
-    public Integer getid(String cpf) {
+    public Cliente getById(int id) {
         EntityManager em = emf.createEntityManager();
-        Integer id = null;
+        Cliente cliente = null;
         try {
-            id = em.createQuery("SELECT c.id_cliente FROM Cliente c WHERE c.cpf = :cpf", Integer.class)
-                    .setParameter("cpf", cpf)
+            cliente = em.createQuery("SELECT c FROM Cliente c WHERE c.id_cliente = :id", Cliente.class)
+                    .setParameter("id", id)
                     .getSingleResult();
         } catch ( Exception e) {
-            System.out.println("Nenhum cliente encontrado com o CPF: " + cpf);
+            System.out.println("Nenhum cliente encontrado com o id: " + id);
         } finally {
             em.close();
         }
-        return id;
+        return cliente;
     }
 
 
@@ -87,6 +88,5 @@ public class RepoCliente implements IRepoCliente<Cliente, Long, Integer> {
         }
         return clientes;
     }
-
 
 }

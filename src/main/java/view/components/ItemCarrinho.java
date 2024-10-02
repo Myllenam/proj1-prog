@@ -1,5 +1,6 @@
 package view.components;
 
+import utils.Principal;
 import view.TelaInicial;
 
 import javax.swing.*;
@@ -113,6 +114,38 @@ public class ItemCarrinho extends JPanel {
 
     public Integer getId() {
         return id;
+    }
+
+    public JPanel getInfoPanel() {
+        return infoPanel;
+    }
+
+    public JPanel getActionsPanel() {
+        return actionsPanel;
+    }
+
+    public JLabel getQtdeLabel() {
+        return qtdeLabel;
+    }
+
+    public JLabel getPrecoLabel() {
+        return precoLabel;
+    }
+
+    public JLabel getPrecoTotalLabel() {
+        return precoTotalLabel;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
     public double getValorTotal() {

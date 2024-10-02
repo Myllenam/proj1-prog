@@ -16,9 +16,7 @@ public class ControllerCliente extends Controller {
     public Cliente encontrarCliente( String cpf) {
         return new RepoCliente().getCpf(cpf);
     }
-    public Integer encontrarIdCliente( String cpf) {
-        return new RepoCliente().getid(cpf);
-    }
+
 
     private boolean validaCampos(String nome, String email, String cpf) {
         String cpfLimpo = cpf.replaceAll("\\.", "").replaceAll("-", "");
@@ -35,6 +33,27 @@ public class ControllerCliente extends Controller {
         }
         return false;
     }
+
+    /**
+     * Verifica se o cliente possui direito a uma recompensa de acordo com a quantidade de pontos
+     * que ele possui em sua conta
+     * @return
+     */
+    public boolean verificaRecompensa(int idCliente) {
+        Cliente cliente = new RepoCliente().getById(idCliente);
+        int pontosCliente = cliente.getPontos();
+
+        // Com quinhentos pontos o cliente ganhar o brinde da promoção
+        if(pontosCliente >= 500) {
+            // Zera os pontos do cliente para começar a contagem novamente
+            cliente.setPontos(0);
+            new RepoCliente().update(cliente);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
     public boolean cadastrarCliente(String nome, String email, String cpf) {

@@ -6,6 +6,7 @@ import controller.ControllerProduto;
 import model.Cliente;
 import model.Pagamento;
 import model.Produto;
+import utils.Principal;
 import utils.Router;
 import view.components.ItemCarrinho;
 import view.components.ItemProduto;
@@ -40,8 +41,6 @@ public class TelaInicial extends TelaBase {
     private JScrollPane scrollProductPanel;
     private static JLabel valorTotal;
 
-    private static ArrayList<ItemCarrinho> carrinho = new ArrayList<>();
-
     public TelaInicial(Router router) {
         super(router);
         controllerProduto = new ControllerProduto();
@@ -65,7 +64,11 @@ public class TelaInicial extends TelaBase {
         finalizarCompraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                router.route("telaPagamento");
+                if (Principal.getValorTotal() <= 0){
+                    showMessage("Nenhum item foi adicionado no carrinho!");
+                } else {
+                    router.route("telaPagamento");
+                }
             }
         });
 
@@ -81,7 +84,18 @@ public class TelaInicial extends TelaBase {
 
             @Override
             public void componentShown(ComponentEvent e) {
+                Principal.setVenda(null);
+                Principal.setCliente(null);
+                Principal.setValorTotal(0.0);
+                Principal.limpaCarrinho();
                 loadFeed();
+                cartPanel.removeAll();
+                cartPanel.setLayout(new BoxLayout(cartPanel, BoxLayout.Y_AXIS));
+                valorTotal.setText("Valor Total: R$"+String.format("%.2f", 0.0)+"");
+                cartPanel.add(valorTotal);
+                cartPanel.revalidate();
+                cartPanel.repaint();
+//                createUIComponents();
             }
 
             @Override
@@ -109,19 +123,12 @@ public class TelaInicial extends TelaBase {
 
         scrollProductPanel.revalidate();
         scrollProductPanel.repaint();
-
-//        panelDeMerda.revalidate();
-//        panelDeMerda.repaint();
-
     }
-
 
 
     private ItemProduto createFeedCard(Produto p) {
         Border topBorder = new EmptyBorder(5, 25, 5, 0);
         Font nomeFont = new Font("Arial", Font.BOLD, 24);
-        Border defaultBorder = new EmptyBorder(0, 10, 5, 0);
-        Font defaultFont = new Font("Arial", Font.BOLD, 14);
         NumberFormat formatadorMoeda = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         String precoFormatado = formatadorMoeda.format(p.getPreco());
         ProductLabel nomeLabel = new ProductLabel(p.getNome(), topBorder, nomeFont);
@@ -149,7 +156,7 @@ public class TelaInicial extends TelaBase {
     }
 
     private boolean isInCart(Integer id) {
-        for (ItemCarrinho i : carrinho) {
+        for (ItemCarrinho i : Principal.getCarrinho()) {
             if (i.getId() == id) {
                 return true;
             }
@@ -160,18 +167,20 @@ public class TelaInicial extends TelaBase {
     public static void atualizaValorTotal() {
         double total = 0;
 
-        for (ItemCarrinho i : carrinho) {
+        for (ItemCarrinho i : Principal.getCarrinho()) {
             total += i.getValorTotal();
         }
-        System.out.println("Valor Total " + total);
+        Principal.setValorTotal(total);
         valorTotal.setText("Valor Total: R$"+String.format("%.2f", total)+"");
 
     }
 
+
+
     private void addToCart(Produto p) {
         if (!isInCart(p.getId_produto())) {
             ItemCarrinho item = new ItemCarrinho(p.getId_produto(), p.getNome(), 1, p.getPreco());
-            carrinho.add(item);
+            Principal.addItemCarrinho(item);
             cartPanel.add(item);
             cartPanel.add(Box.createVerticalStrut(10));
             cartPanel.revalidate();

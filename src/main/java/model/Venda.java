@@ -39,4 +39,16 @@ public class Venda implements Serializable {
     public Integer getId_cliente() {
         return id_cliente;
     }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public void setValor_total(double valor_total) {
+        this.valor_total = valor_total;
+    }
+
+    public void setId_cliente(Integer id_cliente) {
+        this.id_cliente = id_cliente;
+    }
 }

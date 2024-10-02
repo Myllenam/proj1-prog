@@ -13,7 +13,6 @@ import java.util.List;
 public interface IRepoCliente<T, t,x> {
   T save(T obj); 
   T getCpf(String id);
-  x getid(String id);
   void update(T obj);
   List<T> getAll();
 }
