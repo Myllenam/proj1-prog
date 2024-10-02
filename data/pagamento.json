@@ -1,0 +1,44 @@
+{
+  "pagamento":[
+    {
+      "id_pagamento":1,
+      "tipo_pagamento":"Cartão de Crédito"
+    },
+    {
+      "id_pagamento":2,
+      "tipo_pagamento":"Boleto Bancário"
+    },
+    {
+      "id_pagamento":3,
+      "tipo_pagamento":"Cartão de Débito"
+    },
+    {
+      "id_pagamento":4,
+      "tipo_pagamento":"Pix"
+    },
+    {
+      "id_pagamento":5,
+      "tipo_pagamento":"Dinheiro"
+    },
+    {
+      "id_pagamento":6,
+      "tipo_pagamento":"Transferência Bancária"
+    },
+    {
+      "id_pagamento":7,
+      "tipo_pagamento":"Cartão de Crédito"
+    },
+    {
+      "id_pagamento":8,
+      "tipo_pagamento":"Vale Alimentação"
+    },
+    {
+      "id_pagamento":9,
+      "tipo_pagamento":"Paypal"
+    },
+    {
+      "id_pagamento":10,
+      "tipo_pagamento":"Cartão de Débito"
+    }
+  ]
+}

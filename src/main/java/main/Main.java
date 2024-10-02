@@ -5,31 +5,46 @@
 package main;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-
-import dao.RepoCliente;
-import model.Cliente;
+import utils.Router;
+import view.*;
 
 import java.awt.Color;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 
 
 public class Main {
-     public static void main(String[] args){
-        try{
-        UIManager.put("Button.background", new Color(245, 198, 198));
-         UIManager.put("Button.hoverBackground", new Color(255, 182, 193)); 
-            UIManager.put("Button.focusedBackground", new Color(240, 128, 128)); 
-    
-        UIManager.setLookAndFeel(new FlatMacLightLaf());
-        } catch(UnsupportedLookAndFeelException e){
+    public static void main(String[] args) {
+        try {
+            UIManager.put("Button.background", new Color(245, 198, 198));
+            UIManager.put("Button.hoverBackground", new Color(255, 182, 193));
+            UIManager.put("Button.focusedBackground", new Color(240, 128, 128));
+
+            UIManager.setLookAndFeel(new FlatMacLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
         }
-        Cliente c1 = new Cliente(null, "Leticia", "leticia@gmail.com", "98765432178", 100);
-        new RepoCliente().save(c1);
-        
-//        new view.PaginaInicial().setVisible(true);
-         new view.CadastroCliente().setVisible(true);
+//        List<Produto> produtos=new ControllerProduto().getProdutos();
+//        Cliente cliente=new ControllerCliente().encontrarCliente("98765434567");
+//        Integer id=new ControllerCliente().encontrarIdCliente("98765434567");
+//        System.out.println(id);
+
+        Router router = new Router();
+
+        JPanel telaLogin = new TelaLogin(router).telaLogin;
+        JPanel telaInicial = new TelaInicial(router).telaInicial;
+        JPanel telaPagamento = new TelaPagamento(router).telaPagamento;
+        JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
+        JPanel telaNotaFiscal = new TelaNotaFiscal(router).telaNotaFiscal;
+
+        router.addComponent(telaLogin, "telaLogin");
+        router.addComponent(telaInicial, "telaInicial");
+        router.addComponent(telaCadastroCliente, "telaCadastroCliente");
+        router.addComponent(telaPagamento, "telaPagamento");
+        router.addComponent(telaNotaFiscal, "telaNotaFiscal");
+
+
+        router.setVisible(true);
+
 
     }
-    
+
 }
