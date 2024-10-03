@@ -1,13 +1,13 @@
 package dao;
 
-import interfaces.IRepoGet;
+import interfaces.IRepoProduto;
 import model.Produto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
-public class RepoProduto implements IRepoGet<Produto, Long> {
+public class RepoProduto implements IRepoProduto<Produto, Long> {
     private EntityManagerFactory emf= new ConectaDB().getConexao();
 
     @Override

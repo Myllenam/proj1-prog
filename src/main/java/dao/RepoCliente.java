@@ -9,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 
-public class RepoCliente implements IRepoCliente<Cliente, Long, Integer> {
+public class RepoCliente implements IRepoCliente<Cliente> {
     
     private EntityManagerFactory emf= new ConectaDB().getConexao();
     
@@ -30,19 +30,6 @@ public class RepoCliente implements IRepoCliente<Cliente, Long, Integer> {
         return obj;
     }
 
-    @Override
-    public Cliente getCpf(String cpf) {
-        EntityManager em = emf.createEntityManager();
-        Cliente cliente = null;
-        try {
-            cliente = em.createQuery("SELECT c FROM Cliente c WHERE c.cpf = :cpf", Cliente.class)
-                    .setParameter("cpf", cpf)
-                    .getSingleResult();
-        } finally {
-            em.close();
-        }
-        return cliente;
-    }
 
     public Cliente getById(int id) {
         EntityManager em = emf.createEntityManager();

@@ -1,14 +1,16 @@
 package dao;
 
+import interfaces.IRepoVenda;
 import model.Venda;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-public class RepoVenda {
+public class RepoVenda implements IRepoVenda {
     private EntityManagerFactory emf= new ConectaDB().getConexao();
 
+    @Override
     public Venda save(Venda obj) {
         EntityManager em=emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();

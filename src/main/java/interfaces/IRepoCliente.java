@@ -10,9 +10,8 @@ import java.util.List;
  *
  * @author mylle
  */
-public interface IRepoCliente<T, t,x> {
-  T save(T obj); 
-  T getCpf(String id);
+public interface IRepoCliente<T> {
+  T save(T obj);
   void update(T obj);
   List<T> getAll();
 }
