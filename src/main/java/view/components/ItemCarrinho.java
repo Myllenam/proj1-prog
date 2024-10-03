@@ -83,7 +83,6 @@ public class ItemCarrinho extends JPanel {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Não faz nada caso só reste um item no carrinho
                 if (quantidade == 1) {
                     return;
                 }

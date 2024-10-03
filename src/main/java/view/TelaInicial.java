@@ -3,8 +3,6 @@ package view;
 import controller.ControllerCliente;
 import controller.ControllerPagamento;
 import controller.ControllerProduto;
-import model.Cliente;
-import model.Pagamento;
 import model.Produto;
 import utils.Principal;
 import utils.Router;
@@ -17,8 +15,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,13 +35,14 @@ public class TelaInicial extends TelaBase {
     private JPanel totalPanel;
     private JButton sairButton;
     private JScrollPane scrollProductPanel;
+    private JButton limparCarrinhoButton;
     private static JLabel valorTotal;
 
     public TelaInicial(Router router) {
         super(router);
         controllerProduto = new ControllerProduto();
-        controllerPagamento = new ControllerPagamento();
         controllerCliente = new ControllerCliente();
+        controllerPagamento = new ControllerPagamento();
 
 
         loadFeed();
@@ -59,6 +56,20 @@ public class TelaInicial extends TelaBase {
             @Override
             public void actionPerformed(ActionEvent e) {
                 router.route("telaLogin");
+            }
+        });
+        limparCarrinhoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Principal.setValorTotal(0.0);
+                Principal.limpaCarrinho();
+                cartPanel.removeAll();
+                cartPanel.setLayout(new BoxLayout(cartPanel, BoxLayout.Y_AXIS));
+                valorTotal.setText("Valor Total: R$"+String.format("%.2f", 0.0)+"");
+                cartPanel.add(valorTotal);
+                cartPanel.revalidate();
+                cartPanel.repaint();
+
             }
         });
         finalizarCompraButton.addActionListener(new ActionListener() {
@@ -95,7 +106,6 @@ public class TelaInicial extends TelaBase {
                 cartPanel.add(valorTotal);
                 cartPanel.revalidate();
                 cartPanel.repaint();
-//                createUIComponents();
             }
 
             @Override
@@ -145,6 +155,7 @@ public class TelaInicial extends TelaBase {
                 addToCart(p);
             }
         });
+
 
         ItemProduto card = new ItemProduto();
 

@@ -36,10 +36,6 @@ public class Principal {
         Principal.carrinho.add(item);
     }
 
-    public static void removeItemCarrinho(ItemCarrinho item) {
-        Principal.carrinho.remove(item);
-    }
-
     public static Cliente getCliente() {
         return cliente;
     }

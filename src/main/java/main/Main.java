@@ -25,11 +25,10 @@ public class Main {
 
         Router router = new Router();
         JPanel telaLogin = new TelaLogin(router).telaLogin;
-        JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
         JPanel telaInicial = new TelaInicial(router).telaInicial;
+        JPanel telaCadastroCliente = new TelaCadastroCliente(router).telaCadastroCliente;
         JPanel telaPagamento = new TelaPagamento(router).telaPagamento;
         JPanel telaNotaFiscal = new TelaNotaFiscal(router).telaNotaFiscal;
-
         router.addComponent(telaLogin, "telaLogin");
         router.addComponent(telaInicial, "telaInicial");
         router.addComponent(telaCadastroCliente, "telaCadastroCliente");
