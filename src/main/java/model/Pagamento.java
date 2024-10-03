@@ -13,16 +13,14 @@ public class Pagamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_pagamento;
     private String tipo_pagamento;
-    private Integer id_venda;
 
     public Pagamento() {
     }
 
-    public Pagamento(Integer id_pagamento, String tipo_pagamento, Integer id_venda) {
+    public Pagamento(Integer id_pagamento, String tipo_pagamento) {
         super();
         this.id_pagamento = id_pagamento;
         this.tipo_pagamento = tipo_pagamento;
-        this.id_venda = id_venda;
     }
 
     public Integer getId_pagamento() {

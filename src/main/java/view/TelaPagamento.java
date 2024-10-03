@@ -28,7 +28,7 @@ public class TelaPagamento extends TelaBase {
     private JButton voltarButton;
     private JComboBox clientesSelect;
     private JComboBox pagamentosSelect;
-    private JButton finalizarPagamentoButtont;
+    private JButton finalizarPagamentoButton;
     private JPanel Container;
     private JCheckBox informarClienteCheckbox;
     private JCheckBox gerarNotaFiscalCheckBox;
@@ -42,7 +42,7 @@ public class TelaPagamento extends TelaBase {
         controllerVenda = new ControllerVenda();
 
 
-        finalizarPagamentoButtont.addActionListener(new ActionListener() {
+        finalizarPagamentoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 processaVenda();
